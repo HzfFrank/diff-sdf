@@ -1,0 +1,34 @@
+<scene version="2.1.0">
+    <path value="../../scenes/"/>
+
+    <default name="sensors_filename" value="one-sensors.xml"/>
+
+    <include filename="common.xml"/>
+    <default name="emitter_scene" value="./emitter.xml"/>
+    <include filename="$emitter_scene"/>
+    <default name="shape_file" value=""/>
+
+    <bsdf type="principled" id="main-bsdf">
+        <texture type="volume" name="base_color">
+            <volume type="gridvolume" name="volume">
+                <string name="filename" value="$base_color_file"/>
+            </volume>
+        </texture>
+        <texture type="volume" name="roughness">
+            <volume type="gridvolume" name="volume">
+                <string name="filename" value="$roughness_file"/>
+            </volume>
+        </texture>
+        <float name="specular" value="1.000000"/>
+    </bsdf>
+
+    <default name="main_bsdf_name" value="main-bsdf"/>
+
+    <include filename="$shape_file"/>
+
+</scene>
+
+<!-- 将code里的载入设置为：
+sdf_scene = mi.load_file(ref_scene_name, base_color_file=base_color_file, roughness_file=roughness_file,
+                         shape_file='dummysdf.xml', sdf_filename=sdf_filename,
+                         integrator=config.integrator, resx=scene_config.resx, resy=scene_config.resy) -->
